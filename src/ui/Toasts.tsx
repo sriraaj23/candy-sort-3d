@@ -6,7 +6,10 @@ export function Toasts() {
   const toasts = useUi((s) => s.toasts);
   const dismiss = useUi((s) => s.dismissToast);
   return (
-    <div className="pointer-events-none fixed inset-x-0 top-[max(70px,calc(env(safe-area-inset-top)+64px))] z-50 flex flex-col items-center gap-2 px-4" aria-live="polite">
+    <div
+      className="pointer-events-none fixed inset-x-0 top-[max(70px,calc(env(safe-area-inset-top)+64px))] z-50 flex flex-col items-center gap-2 px-4"
+      aria-live="polite"
+    >
       <AnimatePresence>
         {toasts.map((t) => (
           <motion.button
@@ -19,7 +22,9 @@ export function Toasts() {
             onClick={() => dismiss(t.id)}
             className="panel pointer-events-auto flex min-h-[48px] max-w-sm items-center gap-3 px-4 py-2 text-left"
           >
-            <span className={`grid h-9 w-9 shrink-0 place-items-center rounded-full ${t.kind === 'achievement' ? 'bg-[#ffd23f] text-[#7a3b00]' : 'bg-pink-100 text-pink-600'}`}>
+            <span
+              className={`grid h-9 w-9 shrink-0 place-items-center rounded-full ${t.kind === 'achievement' ? 'bg-[#ffd23f] text-[#7a3b00]' : 'bg-pink-100 text-pink-600'}`}
+            >
               {t.kind === 'achievement' ? <Trophy className="h-5 w-5" /> : <AlertCircle className="h-5 w-5" />}
             </span>
             <span>

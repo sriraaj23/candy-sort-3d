@@ -27,7 +27,12 @@ describe('solver', () => {
   });
 
   it('reports unsolvable boards', () => {
-    const res = solve(b([[0, 1, 0, 1], [1, 0, 1, 0]]));
+    const res = solve(
+      b([
+        [0, 1, 0, 1],
+        [1, 0, 1, 0],
+      ]),
+    );
     expect(res.status).toBe('unsolvable');
   });
 
@@ -36,7 +41,18 @@ describe('solver', () => {
   });
 
   it('respects the node limit', () => {
-    const board = b([[0, 1, 2, 3], [4, 5, 6, 7], [7, 6, 5, 4], [3, 2, 1, 0], [0, 2, 4, 6], [1, 3, 5, 7], [7, 5, 3, 1], [6, 4, 2, 0], [], []]);
+    const board = b([
+      [0, 1, 2, 3],
+      [4, 5, 6, 7],
+      [7, 6, 5, 4],
+      [3, 2, 1, 0],
+      [0, 2, 4, 6],
+      [1, 3, 5, 7],
+      [7, 5, 3, 1],
+      [6, 4, 2, 0],
+      [],
+      [],
+    ]);
     const res = solve(board, { nodeLimit: 5 });
     expect(['limit', 'solved']).toContain(res.status);
     expect(res.nodes).toBeLessThanOrEqual(5);

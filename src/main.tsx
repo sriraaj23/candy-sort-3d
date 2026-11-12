@@ -1,11 +1,23 @@
 import React from 'react';
 import ReactDOM from 'react-dom/client';
 import App from './App';
+import { ErrorBoundary, FatalScreen, hasWebGL } from './ui/ErrorBoundary';
 import './index.css';
 
-ReactDOM.createRoot(document.getElementById('root')!).render(
+const root = ReactDOM.createRoot(document.getElementById('root')!);
+
+root.render(
   <React.StrictMode>
-    <App />
+    <ErrorBoundary>
+      {hasWebGL() ? (
+        <App />
+      ) : (
+        <FatalScreen
+          title="3D not supported"
+          body="Candy Sort 3D needs WebGL. Please enable hardware acceleration or try a recent version of Chrome, Safari, Firefox or Edge."
+        />
+      )}
+    </ErrorBoundary>
   </React.StrictMode>,
 );
 

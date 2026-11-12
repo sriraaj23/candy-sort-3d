@@ -1,16 +1,7 @@
 import { create } from 'zustand';
 
 export type Screen = 'menu' | 'map' | 'game';
-export type Modal =
-  | 'pause'
-  | 'restart'
-  | 'stuck'
-  | 'victory'
-  | 'daily'
-  | 'settings'
-  | 'themes'
-  | 'achievements'
-  | 'reset';
+export type Modal = 'pause' | 'restart' | 'stuck' | 'victory' | 'daily' | 'settings' | 'themes' | 'achievements' | 'reset';
 
 export interface Toast {
   id: number;

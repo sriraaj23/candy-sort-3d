@@ -65,7 +65,10 @@ describe('all 100 levels', () => {
       expect(lvl.jars.length, `level ${lvl.level} jars`).toBe(cfg.jars);
       expect(isWellFormed(board), `level ${lvl.level} well formed`).toBe(true);
       expect(isWin(board), `level ${lvl.level} starts solved`).toBe(false);
-      expect(lvl.jars.some((j) => isJarComplete(j, 4)), `level ${lvl.level} starts with a full jar`).toBe(false);
+      expect(
+        lvl.jars.some((j) => isJarComplete(j, 4)),
+        `level ${lvl.level} starts with a full jar`,
+      ).toBe(false);
 
       // The stored solution replays to a win...
       let cur = board;

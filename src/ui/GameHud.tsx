@@ -115,7 +115,12 @@ export function GameHud() {
       <div className="flex justify-center px-3 pb-[max(14px,env(safe-area-inset-bottom))]">
         <div className="pointer-events-auto flex w-full max-w-lg items-end justify-center gap-2.5 sm:gap-4">
           <BarButton icon={<Undo2 className="h-6 w-6" />} label="Undo" onClick={() => useGame.getState().undo()} disabled={!canUndo} />
-          <BarButton icon={<RotateCcw className="h-6 w-6" />} label="Restart" onClick={() => openModal('restart')} disabled={!playing || moves === 0} />
+          <BarButton
+            icon={<RotateCcw className="h-6 w-6" />}
+            label="Restart"
+            onClick={() => openModal('restart')}
+            disabled={!playing || moves === 0}
+          />
           <BarButton
             icon={hintPending ? <Loader2 className="h-6 w-6 animate-spin" /> : <Lightbulb className="h-6 w-6" />}
             label="Hint"

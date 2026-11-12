@@ -46,7 +46,17 @@ export function CandyButton({ children, onClick, variant = 'pink', disabled, cla
   );
 }
 
-export function IconButton({ children, onClick, label, disabled }: { children: ReactNode; onClick: () => void; label: string; disabled?: boolean }) {
+export function IconButton({
+  children,
+  onClick,
+  label,
+  disabled,
+}: {
+  children: ReactNode;
+  onClick: () => void;
+  label: string;
+  disabled?: boolean;
+}) {
   return (
     <motion.button
       type="button"

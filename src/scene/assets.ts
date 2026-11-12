@@ -30,7 +30,11 @@ function prep(g: Geo, m?: THREE.Matrix4): Geo {
 }
 
 const mat4 = (pos: [number, number, number], rot: [number, number, number] = [0, 0, 0], scale: [number, number, number] = [1, 1, 1]) =>
-  new THREE.Matrix4().compose(new THREE.Vector3(...pos), new THREE.Quaternion().setFromEuler(new THREE.Euler(...rot)), new THREE.Vector3(...scale));
+  new THREE.Matrix4().compose(
+    new THREE.Vector3(...pos),
+    new THREE.Quaternion().setFromEuler(new THREE.Euler(...rot)),
+    new THREE.Vector3(...scale),
+  );
 
 const sphere = (r: number, pos: [number, number, number], scale: [number, number, number] = [1, 1, 1], seg = 20) =>
   prep(new THREE.SphereGeometry(r, seg, Math.round(seg * 0.75)), mat4(pos, [0, 0, 0], scale));
@@ -254,7 +258,18 @@ export function getCandyMaterial(color: number, part: 'main' | 'accent', quality
 }
 
 // ---------- jar geometry ----------
-let jarGeos: { glass: Geo; rim: Geo; base: Geo; label: Geo; stripe: Geo; lid: Geo; knob: Geo; highlight: Geo; hit: Geo; hitShort: Geo } | null = null;
+let jarGeos: {
+  glass: Geo;
+  rim: Geo;
+  base: Geo;
+  label: Geo;
+  stripe: Geo;
+  lid: Geo;
+  knob: Geo;
+  highlight: Geo;
+  hit: Geo;
+  hitShort: Geo;
+} | null = null;
 
 function roundedRect(w: number, h: number, r: number): THREE.Shape {
   const s = new THREE.Shape();

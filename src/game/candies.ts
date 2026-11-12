@@ -1,13 +1,5 @@
 /** Pure data describing the eight candy kinds. Index = colour id. */
-export type CandyShape =
-  | 'gummyBear'
-  | 'hardCandy'
-  | 'jellyBean'
-  | 'wrapped'
-  | 'lollipop'
-  | 'swirlBall'
-  | 'marshmallowTwist'
-  | 'bonbon';
+export type CandyShape = 'gummyBear' | 'hardCandy' | 'jellyBean' | 'wrapped' | 'lollipop' | 'swirlBall' | 'marshmallowTwist' | 'bonbon';
 
 export interface CandyKind {
   id: number;

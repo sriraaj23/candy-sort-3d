@@ -17,16 +17,7 @@ import {
   X,
 } from 'lucide-react';
 import { useEffect, useState, type ReactNode } from 'react';
-import {
-  ACHIEVEMENTS,
-  ADD_JAR_COST,
-  DAILY_REWARDS,
-  LEVEL_COUNT,
-  THEMES,
-  dailyStatus,
-  dayKey,
-  type ThemeId,
-} from '../game';
+import { ACHIEVEMENTS, ADD_JAR_COST, DAILY_REWARDS, LEVEL_COUNT, THEMES, dailyStatus, dayKey, type ThemeId } from '../game';
 import { sfx } from '../audio/engine';
 import { useGame } from '../store/gameStore';
 import { useProgress } from '../store/progressStore';
@@ -193,7 +184,11 @@ function VictoryModal() {
       <div className="mx-auto my-4 flex w-fit items-center gap-2 rounded-full bg-[#fff4cc] px-5 py-2 text-2xl font-extrabold text-[#a35f00]">
         <CoinIcon size={28} /> +<AnimatedNumber value={coinShown} onTick={() => sfx('coin')} />
       </div>
-      {last && <p className="mb-3 text-center font-bold text-pink-600">You sorted every jar in the land. Replay any level to collect more stars!</p>}
+      {last && (
+        <p className="mb-3 text-center font-bold text-pink-600">
+          You sorted every jar in the land. Replay any level to collect more stars!
+        </p>
+      )}
       <div className="flex flex-col gap-3">
         {!last && (
           <CandyButton variant="green" size="lg" onClick={() => startLevel(level + 1)}>
@@ -257,7 +252,11 @@ function DailyModal() {
         })}
       </div>
       {claimed > 0 ? (
-        <motion.div initial={{ scale: 0.6 }} animate={{ scale: 1 }} className="flex items-center justify-center gap-2 font-display text-3xl font-extrabold text-[#a35f00]">
+        <motion.div
+          initial={{ scale: 0.6 }}
+          animate={{ scale: 1 }}
+          className="flex items-center justify-center gap-2 font-display text-3xl font-extrabold text-[#a35f00]"
+        >
           <CoinIcon size={34} /> +{claimed}
         </motion.div>
       ) : st.canClaim ? (
@@ -327,7 +326,9 @@ function SettingsModal() {
           }}
           className="flex min-h-[52px] items-center justify-between rounded-2xl bg-pink-50 px-4 font-extrabold text-pink-700"
         >
-          <span className="flex items-center gap-2">{s.muted ? <VolumeX className="h-5 w-5" /> : <Volume2 className="h-5 w-5" />} Mute all</span>
+          <span className="flex items-center gap-2">
+            {s.muted ? <VolumeX className="h-5 w-5" /> : <Volume2 className="h-5 w-5" />} Mute all
+          </span>
           <span className={`relative h-8 w-14 rounded-full transition-colors ${s.muted ? 'bg-[#ff4f93]' : 'bg-pink-200'}`}>
             <span className={`absolute top-1 h-6 w-6 rounded-full bg-white shadow transition-all ${s.muted ? 'left-7' : 'left-1'}`} />
           </span>
@@ -354,7 +355,11 @@ function SettingsModal() {
             ))}
           </div>
           <p className="mt-1.5 text-xs font-bold text-pink-500">
-            {s.quality === 'low' ? 'No shadows, fewer particles. Best for older phones.' : s.quality === 'medium' ? 'Soft contact shadows. Recommended.' : 'Soft shadows, real glass and extra sparkle.'}
+            {s.quality === 'low'
+              ? 'No shadows, fewer particles. Best for older phones.'
+              : s.quality === 'medium'
+                ? 'Soft contact shadows. Recommended.'
+                : 'Soft shadows, real glass and extra sparkle.'}
           </p>
         </div>
         <CandyButton variant="white" className="mt-3 !text-red-500" onClick={() => useUi.getState().openModal('reset')}>
@@ -412,7 +417,10 @@ function ThemesModal() {
                 <div className="absolute bottom-0 left-[30%] h-20 w-1/2 rounded-t-full" style={{ background: t.mountains[1] }} />
                 <div className="absolute bottom-0 right-[-10%] h-12 w-1/2 rounded-t-full" style={{ background: t.mountains[2] }} />
                 <div className="absolute inset-x-0 bottom-0 h-4" style={{ background: t.ground }} />
-                <div className="absolute right-3 top-3 h-8 w-8 rounded-full border-4" style={{ background: t.lollipop[0], borderColor: t.lollipop[1] }} />
+                <div
+                  className="absolute right-3 top-3 h-8 w-8 rounded-full border-4"
+                  style={{ background: t.lollipop[0], borderColor: t.lollipop[1] }}
+                />
                 {!has && (
                   <div className="absolute inset-0 grid place-items-center bg-black/20">
                     <Lock className="h-8 w-8 text-white drop-shadow" />
@@ -464,7 +472,9 @@ function AchievementsModal() {
           const has = got.includes(a.id);
           return (
             <li key={a.id} className={`flex items-center gap-3 rounded-2xl p-3 ${has ? 'bg-[#fff4cc]' : 'bg-pink-50'}`}>
-              <span className={`grid h-11 w-11 shrink-0 place-items-center rounded-full ${has ? 'bg-[#ffd23f] text-[#7a3b00]' : 'bg-pink-100 text-pink-300'}`}>
+              <span
+                className={`grid h-11 w-11 shrink-0 place-items-center rounded-full ${has ? 'bg-[#ffd23f] text-[#7a3b00]' : 'bg-pink-100 text-pink-300'}`}
+              >
                 {has ? <Trophy className="h-6 w-6" /> : <Lock className="h-5 w-5" />}
               </span>
               <span className="flex-1">

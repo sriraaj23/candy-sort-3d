@@ -1,5 +1,6 @@
 import { create } from 'zustand';
 import { createJSONStorage, persist } from 'zustand/middleware';
+import { safeStorage } from './safeStorage';
 
 export type Quality = 'low' | 'medium' | 'high';
 
@@ -36,6 +37,13 @@ export const useSettings = create<SettingsState>()(
       setMuted: (muted) => set({ muted }),
       setQuality: (quality) => set({ quality }),
     }),
-    { name: SETTINGS_KEY, version: 1, storage: createJSONStorage(() => localStorage) },
+    {
+      name: SETTINGS_KEY,
+      version: 1,
+      storage: createJSONStorage(() => safeStorage),
+      partialize: (s) => ({ musicVolume: s.musicVolume, sfxVolume: s.sfxVolume, muted: s.muted, quality: s.quality }),
+      // Bump `version` and transform old shapes here when the save format changes.
+      migrate: (persisted) => persisted as SettingsState,
+    },
   ),
 );

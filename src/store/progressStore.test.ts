@@ -91,7 +91,14 @@ describe('progress store', () => {
       PROGRESS_KEY,
       JSON.stringify({
         version: 1,
-        state: { coins: 777, maxUnlocked: 12, stars: { 3: 2 }, unlockedThemes: ['candyland', 'old-theme'], selectedTheme: 'old-theme', achievements: ['first_win', 'gone'] },
+        state: {
+          coins: 777,
+          maxUnlocked: 12,
+          stars: { 3: 2 },
+          unlockedThemes: ['candyland', 'old-theme'],
+          selectedTheme: 'old-theme',
+          achievements: ['first_win', 'gone'],
+        },
       }),
     );
     await useProgress.persist.rehydrate();

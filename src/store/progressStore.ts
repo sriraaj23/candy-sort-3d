@@ -13,6 +13,7 @@ import {
   type ThemeId,
 } from '../game';
 import { useUi } from './uiStore';
+import { safeStorage } from './safeStorage';
 
 export const PROGRESS_KEY = 'candy-sort-3d:progress:v1';
 
@@ -155,7 +156,10 @@ export const useProgress = create<ProgressState>()(
     {
       name: PROGRESS_KEY,
       version: 1,
-      storage: createJSONStorage(() => localStorage),
+      storage: createJSONStorage(() => safeStorage),
+      // Bump `version` and transform old shapes here when the save format changes;
+      // `merge` below then sanitises whatever comes back.
+      migrate: (persisted) => persisted as ProgressData,
       partialize: (s) => {
         const data: Partial<ProgressState> = { ...s };
         for (const k of Object.keys(data) as (keyof ProgressState)[]) if (typeof data[k] === 'function') delete data[k];

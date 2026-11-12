@@ -96,14 +96,27 @@ export function Jar({ index }: { index: number }) {
       base: new THREE.MeshStandardMaterial({ color: theme.jarBase, roughness: 0.45 }),
       label: new THREE.MeshStandardMaterial({ color: theme.label, roughness: 0.6 }),
       stripe: new THREE.MeshStandardMaterial({ color: theme.jarRim, roughness: 0.6 }),
-      highlight: new THREE.MeshBasicMaterial({ color: '#ffffff', transparent: true, opacity: 0.45, depthWrite: false, blending: THREE.AdditiveBlending }),
+      highlight: new THREE.MeshBasicMaterial({
+        color: '#ffffff',
+        transparent: true,
+        opacity: 0.45,
+        depthWrite: false,
+        blending: THREE.AdditiveBlending,
+      }),
     }),
     [theme],
   );
   useEffect(() => () => Object.values(parts).forEach((m) => m.dispose()), [parts]);
 
   const glowMat = useMemo(
-    () => new THREE.MeshBasicMaterial({ map: getGlowTexture(), transparent: true, opacity: 0, depthWrite: false, blending: THREE.AdditiveBlending }),
+    () =>
+      new THREE.MeshBasicMaterial({
+        map: getGlowTexture(),
+        transparent: true,
+        opacity: 0,
+        depthWrite: false,
+        blending: THREE.AdditiveBlending,
+      }),
     [],
   );
   useEffect(() => () => glowMat.dispose(), [glowMat]);
@@ -200,17 +213,28 @@ export function Jar({ index }: { index: number }) {
   if (!slot) return null;
   return (
     <group ref={group} dispose={null}>
-      {quality === 'medium' && (
-        <mesh geometry={extras.shadowPlane} material={extras.shadowMat} position-y={0.012} renderOrder={-1} />
-      )}
+      {quality === 'medium' && <mesh geometry={extras.shadowPlane} material={extras.shadowMat} position-y={0.012} renderOrder={-1} />}
       <mesh ref={glow} geometry={extras.glowPlane} material={glowMat} position={[0, 1.6, -0.75]} renderOrder={-1} visible={false} />
       <group ref={body}>
         <mesh geometry={geos.base} material={parts.base} castShadow={quality === 'high'} receiveShadow={quality === 'high'} />
         <mesh geometry={geos.label} material={parts.label} position={[0, BASE_H / 2, 0.76]} />
         <mesh geometry={geos.stripe} material={parts.stripe} position={[0, BASE_H / 2, 0.765]} />
         <mesh geometry={geos.glass} material={glassMat} renderOrder={2} />
-        <mesh geometry={geos.highlight} material={parts.highlight} position={[-0.36, (JAR_TOP + BASE_H) / 2, 0.47]} rotation-y={-0.65} renderOrder={3} />
-        <mesh geometry={geos.highlight} material={parts.highlight} position={[0.42, (JAR_TOP + BASE_H) / 2 + 0.3, 0.41]} rotation-y={0.8} scale={[0.5, 0.5, 1]} renderOrder={3} />
+        <mesh
+          geometry={geos.highlight}
+          material={parts.highlight}
+          position={[-0.36, (JAR_TOP + BASE_H) / 2, 0.47]}
+          rotation-y={-0.65}
+          renderOrder={3}
+        />
+        <mesh
+          geometry={geos.highlight}
+          material={parts.highlight}
+          position={[0.42, (JAR_TOP + BASE_H) / 2 + 0.3, 0.41]}
+          rotation-y={0.8}
+          scale={[0.5, 0.5, 1]}
+          renderOrder={3}
+        />
         <mesh geometry={geos.rim} material={parts.rim} />
         <group ref={lid} visible={false}>
           {completeColor >= 0 && (
@@ -222,7 +246,9 @@ export function Jar({ index }: { index: number }) {
         </group>
       </group>
       <mesh ref={arrow} geometry={extras.arrow} material={extras.arrowMat} visible={false} rotation-x={Math.PI} />
-      {burst > 0 && <SparkleBurst key={burst} color={completeColor >= 0 ? CANDY_KINDS[completeColor].color : '#ffffff'} y={JAR_TOP} quality={quality} />}
+      {burst > 0 && (
+        <SparkleBurst key={burst} color={completeColor >= 0 ? CANDY_KINDS[completeColor].color : '#ffffff'} y={JAR_TOP} quality={quality} />
+      )}
       <mesh
         geometry={slot.row === 0 && slots.length > 5 ? geos.hitShort : geos.hit}
         material={extras.hitMat}

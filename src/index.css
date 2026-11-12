@@ -27,7 +27,9 @@ body,
     font-family: 'Baloo 2', system-ui, sans-serif;
     font-weight: 800;
     color: #fff;
-    text-shadow: 0 2px 0 rgba(150, 30, 80, 0.45), 0 4px 10px rgba(150, 30, 80, 0.25);
+    text-shadow:
+      0 2px 0 rgba(150, 30, 80, 0.45),
+      0 4px 10px rgba(150, 30, 80, 0.25);
   }
   .panel {
     @apply rounded-[28px] bg-white/90 shadow-[0_10px_0_rgba(214,90,140,0.25),0_20px_40px_rgba(120,30,70,0.25)] backdrop-blur;

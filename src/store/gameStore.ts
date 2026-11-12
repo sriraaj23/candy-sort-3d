@@ -115,9 +115,12 @@ export const useGame = create<GameState>()((set, get) => {
       set({ status: 'won', result, selected: null, hint: null });
       emit({ type: 'win' });
       prefetchLevel(s.level + 1);
-      setTimeout(() => {
-        if (get().status === 'won' && get().result === result) useUi.getState().openModal('victory');
-      }, useUi.getState().reducedMotion ? 400 : 1500);
+      setTimeout(
+        () => {
+          if (get().status === 'won' && get().result === result) useUi.getState().openModal('victory');
+        },
+        useUi.getState().reducedMotion ? 400 : 1500,
+      );
       return;
     }
     if (isStuck(b)) {

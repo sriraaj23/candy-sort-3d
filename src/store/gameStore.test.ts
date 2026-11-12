@@ -4,7 +4,6 @@ import { useProgress } from './progressStore';
 import { useUi } from './uiStore';
 import { HINT_COST, ADD_JAR_COST, START_COINS, isValidMove } from '../game';
 
-
 const ready = () => useGame.setState({ busyUntil: 0 });
 
 async function load(level: number) {
@@ -127,7 +126,18 @@ describe('game store', () => {
 
   it('an unsolvable hint costs nothing and suggests Undo or Add Jar', async () => {
     await load(1);
-    useGame.setState({ jars: [[1, 0, 1, 1], [0, 1, 0]], ids: [[0, 1, 2, 3], [4, 5, 6]], colors: [1, 0, 1, 1, 0, 1, 0], busyUntil: 0 });
+    useGame.setState({
+      jars: [
+        [1, 0, 1, 1],
+        [0, 1, 0],
+      ],
+      ids: [
+        [0, 1, 2, 3],
+        [4, 5, 6],
+      ],
+      colors: [1, 0, 1, 1, 0, 1, 0],
+      busyUntil: 0,
+    });
     const coins = useProgress.getState().coins;
     const seen: string[] = [];
     const unsub = useUi.subscribe((u) => u.toasts.forEach((t) => seen.push(t.body ?? '')));
@@ -156,8 +166,14 @@ describe('game store', () => {
     await load(1);
     // [1,0,1] / [0,1,0,1]: moving 1 -> 0 leaves [1,0,1,1] / [0,1,0] with no valid move.
     useGame.setState({
-      jars: [[1, 0, 1], [0, 1, 0, 1]],
-      ids: [[0, 1, 2], [3, 4, 5, 6]],
+      jars: [
+        [1, 0, 1],
+        [0, 1, 0, 1],
+      ],
+      ids: [
+        [0, 1, 2],
+        [3, 4, 5, 6],
+      ],
       colors: [1, 0, 1, 0, 1, 0, 1],
       capacity: 4,
       busyUntil: 0,
@@ -166,7 +182,10 @@ describe('game store', () => {
     useGame.getState().tapJar(1);
     useGame.getState().tapJar(0);
     await vi.runAllTimersAsync();
-    expect(useGame.getState().jars).toEqual([[1, 0, 1, 1], [0, 1, 0]]);
+    expect(useGame.getState().jars).toEqual([
+      [1, 0, 1, 1],
+      [0, 1, 0],
+    ]);
     expect(useUi.getState().modals).toContain('stuck');
     // Undo closes the popup.
     ready();

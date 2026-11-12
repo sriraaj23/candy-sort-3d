@@ -29,7 +29,21 @@ export default tseslint.config(
     rules: {
       'no-restricted-imports': [
         'error',
-        { patterns: ['react', 'react-*', 'three', 'three/*', '@react-three/*', 'zustand', 'zustand/*', '../store/*', '../scene/*', '../ui/*', '../audio/*'] },
+        {
+          patterns: [
+            'react',
+            'react-*',
+            'three',
+            'three/*',
+            '@react-three/*',
+            'zustand',
+            'zustand/*',
+            '../store/*',
+            '../scene/*',
+            '../ui/*',
+            '../audio/*',
+          ],
+        },
       ],
     },
   },

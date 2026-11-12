@@ -1,16 +1,6 @@
 import type { ThemeMusic } from '../game';
 
-export type SoundName =
-  | 'select'
-  | 'deselect'
-  | 'drop'
-  | 'invalid'
-  | 'jarComplete'
-  | 'levelComplete'
-  | 'click'
-  | 'coin'
-  | 'hint'
-  | 'pop';
+export type SoundName = 'select' | 'deselect' | 'drop' | 'invalid' | 'jarComplete' | 'levelComplete' | 'click' | 'coin' | 'hint' | 'pop';
 
 const midi = (n: number) => 440 * Math.pow(2, (n - 69) / 12);
 

@@ -5,8 +5,7 @@ import { solve } from './solver';
 import type { Board } from './types';
 
 export type WorkerRequest =
-  | { id: number; type: 'generate'; level: number }
-  | { id: number; type: 'solve'; board: Board; nodeLimit: number };
+  { id: number; type: 'generate'; level: number } | { id: number; type: 'solve'; board: Board; nodeLimit: number };
 
 self.onmessage = (e: MessageEvent<WorkerRequest>) => {
   const msg = e.data;

@@ -31,19 +31,40 @@ describe('rules', () => {
   it('moves exactly one candy and can be reverted', () => {
     const board = b([[0, 1, 1], [1]]);
     const after = applyMove(board, { from: 0, to: 1 });
-    expect(after.jars).toEqual([[0, 1], [1, 1]]);
+    expect(after.jars).toEqual([
+      [0, 1],
+      [1, 1],
+    ]);
     expect(board.jars).toEqual([[0, 1, 1], [1]]); // immutable
     expect(revertMove(after, { from: 0, to: 1 }).jars).toEqual(board.jars);
   });
 
   it('wins only when every jar is empty or complete', () => {
     expect(isWin(b([[0, 0, 0, 0], [], [1, 1, 1, 1]]))).toBe(true);
-    expect(isWin(b([[0, 0, 0, 0], [1, 1], [1, 1]]))).toBe(false); // colour split
-    expect(isWin(b([[0, 0, 0, 1], [1, 1, 1, 0]]))).toBe(false);
+    expect(
+      isWin(
+        b([
+          [0, 0, 0, 0],
+          [1, 1],
+          [1, 1],
+        ]),
+      ),
+    ).toBe(false); // colour split
+    expect(
+      isWin(
+        b([
+          [0, 0, 0, 1],
+          [1, 1, 1, 0],
+        ]),
+      ),
+    ).toBe(false);
   });
 
   it('detects stuck boards', () => {
-    const stuck = b([[0, 1, 0, 1], [1, 0, 1, 0]]);
+    const stuck = b([
+      [0, 1, 0, 1],
+      [1, 0, 1, 0],
+    ]);
     expect(hasValidMove(stuck)).toBe(false);
     expect(isStuck(stuck)).toBe(true);
     expect(isStuck(b([[0, 0, 0, 0]]))).toBe(false);

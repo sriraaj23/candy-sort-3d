@@ -66,7 +66,11 @@ function orderedMoves(board: Board): Move[] {
   const { jars, capacity } = board;
   const scored: { m: Move; s: number }[] = [];
   let firstEmpty = -1;
-  for (let i = 0; i < jars.length; i++) if (jars[i].length === 0) { firstEmpty = i; break; }
+  for (let i = 0; i < jars.length; i++)
+    if (jars[i].length === 0) {
+      firstEmpty = i;
+      break;
+    }
 
   for (let from = 0; from < jars.length; from++) {
     const src = jars[from];

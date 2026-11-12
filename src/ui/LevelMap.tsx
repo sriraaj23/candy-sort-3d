@@ -59,8 +59,25 @@ export function LevelMap() {
       <div ref={scroller} className="no-scrollbar relative flex-1 overflow-y-auto overscroll-contain" style={{ touchAction: 'pan-y' }}>
         <div className="relative mx-auto w-full max-w-[460px]" style={{ height }}>
           <svg className="absolute inset-0 h-full w-full" viewBox={`0 0 100 ${height}`} preserveAspectRatio="none" aria-hidden>
-            <path d={d} fill="none" stroke="#ffffff" strokeWidth="22" strokeLinecap="round" strokeLinejoin="round" vectorEffect="non-scaling-stroke" opacity="0.9" />
-            <path d={d} fill="none" stroke="#ff9cc6" strokeWidth="6" strokeDasharray="2 16" strokeLinecap="round" vectorEffect="non-scaling-stroke" />
+            <path
+              d={d}
+              fill="none"
+              stroke="#ffffff"
+              strokeWidth="22"
+              strokeLinecap="round"
+              strokeLinejoin="round"
+              vectorEffect="non-scaling-stroke"
+              opacity="0.9"
+            />
+            <path
+              d={d}
+              fill="none"
+              stroke="#ff9cc6"
+              strokeWidth="6"
+              strokeDasharray="2 16"
+              strokeLinecap="round"
+              vectorEffect="non-scaling-stroke"
+            />
           </svg>
           {Array.from({ length: LEVEL_COUNT }, (_, i) => {
             const level = i + 1;

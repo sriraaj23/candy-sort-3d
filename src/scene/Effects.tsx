@@ -22,8 +22,23 @@ export function SparkleBurst({ color, y, quality }: { color: string; y: number; 
     [count],
   );
   const geo = useMemo(() => new THREE.OctahedronGeometry(1, 0), []);
-  const mat = useMemo(() => new THREE.MeshBasicMaterial({ color: new THREE.Color(color).lerp(new THREE.Color('#ffffff'), 0.45), transparent: true, blending: THREE.AdditiveBlending, depthWrite: false }), [color]);
-  useEffect(() => () => { geo.dispose(); mat.dispose(); }, [geo, mat]);
+  const mat = useMemo(
+    () =>
+      new THREE.MeshBasicMaterial({
+        color: new THREE.Color(color).lerp(new THREE.Color('#ffffff'), 0.45),
+        transparent: true,
+        blending: THREE.AdditiveBlending,
+        depthWrite: false,
+      }),
+    [color],
+  );
+  useEffect(
+    () => () => {
+      geo.dispose();
+      mat.dispose();
+    },
+    [geo, mat],
+  );
 
   useFrame(() => {
     const m = ref.current;
@@ -73,7 +88,13 @@ export function Confetti({ quality, width }: { quality: Quality; width: number }
     for (let i = 0; i < count; i++) m.setColorAt(i, c.set(palette[i % palette.length]));
     if (m.instanceColor) m.instanceColor.needsUpdate = true;
   }, [count]);
-  useEffect(() => () => { geo.dispose(); mat.dispose(); }, [geo, mat]);
+  useEffect(
+    () => () => {
+      geo.dispose();
+      mat.dispose();
+    },
+    [geo, mat],
+  );
 
   useFrame(() => {
     const m = ref.current;
@@ -119,7 +140,13 @@ export function DriftParticles({ quality }: { quality: Quality }) {
     for (let i = 0; i < count; i++) m.setColorAt(i, c.set(CANDY_KINDS[i % 8].color).lerp(new THREE.Color('#ffffff'), 0.35));
     if (m.instanceColor) m.instanceColor.needsUpdate = true;
   }, [count]);
-  useEffect(() => () => { geo.dispose(); mat.dispose(); }, [geo, mat]);
+  useEffect(
+    () => () => {
+      geo.dispose();
+      mat.dispose();
+    },
+    [geo, mat],
+  );
 
   useFrame((state) => {
     const m = ref.current;

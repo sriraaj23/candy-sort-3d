@@ -45,7 +45,10 @@ export function fitCamera(points: THREE.Vector3[], fov: number, width: number, h
     scratch.updateMatrixWorld();
   };
   const extents = () => {
-    let minX = Infinity, maxX = -Infinity, minY = Infinity, maxY = -Infinity;
+    let minX = Infinity,
+      maxX = -Infinity,
+      minY = Infinity,
+      maxY = -Infinity;
     for (const p of points) {
       v.copy(p).project(scratch);
       minX = Math.min(minX, v.x);
